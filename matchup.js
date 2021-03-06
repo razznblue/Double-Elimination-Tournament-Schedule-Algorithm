@@ -12,7 +12,7 @@ export class Matchup {
     }
 
     runMatch(championship) {
-        console.log("Match between... " + this.teams[0].name + " and " + this.teams[1].name);
+        //console.log("Match between... " + this.teams[0].name + " and " + this.teams[1].name);
         while (true) {
             this.attemptScore();
             if (this.team1Points === 3 || this.team2Points === 3) {

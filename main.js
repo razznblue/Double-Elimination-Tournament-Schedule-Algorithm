@@ -2,6 +2,25 @@ import { Team } from "./team.js";
 import { Matchup } from "./matchup.js";
 import { Season } from "./season.js";
 
+const names = [
+    "Barbashes",
+    "Inklings",
+    "Gilmore Girls",
+    "Lumpia",
+    "Ringworms",
+    "Pinky Toes",
+    "Ariolas",
+    "Backyardigans",
+    "Titty Fart",
+    "Nostril Stuff",
+    "Lukes",
+    "The Dragonfly",
+    "Hay There",
+    "Tellytubies",
+    "Malasadas",
+    "Jalapenos",
+];
+
 
 // Run app.init() to start the program
 const app = {
@@ -10,67 +29,66 @@ const app = {
 
         const season = new Season(teams, 0);
 
-        // FIRST ROUND
-        const firstRound = this.getMatchups(teams, "1");
-        const firstRoundGroups = this.executeRound(firstRound, "1");
+        for (let i = 0; i < 80; i++) {
+            // FIRST ROUND
+            const firstRound = this.getMatchups(teams, "1");
+            const firstRoundGroups = this.executeRound(firstRound, "1");
+    
+            // SECOND ROUND
+            const secondRoundGanhar = this.getMatchups(firstRoundGroups[0], "2");
+            const secondRoundPerder = this.getMatchups(firstRoundGroups[1], "2");
+    
+            const secondRoundGanharTeams = this.executeRound(secondRoundGanhar, "2", "ganhar");
+            const secondRoundPerderTeams = this.executeRound(secondRoundPerder, "2", "perder");
+    
+            const eliteEightTeams1 = secondRoundGanharTeams[0];
+    
+            const eliminated1 = secondRoundPerderTeams[1];
+            this.addEliminatedTeams(teams, eliminated1);
+    
+            //THIRD ROUND
+            const thirdRounders1 = secondRoundGanharTeams[1];
+            const thirdRounders2 = secondRoundPerderTeams[0];
+            const thirdRoundTeams = thirdRounders1.concat(thirdRounders2);
+    
+            const thirdRoundMatchups = this.getMatchups(thirdRoundTeams, "3");
+            const endOfThirdRoundTeams = this.executeRound(thirdRoundMatchups, "3");
+    
+            const eliteEightTeams2 = endOfThirdRoundTeams[0];
+    
+            const eliminated2 = endOfThirdRoundTeams[1];
+            this.addEliminatedTeams(teams, eliminated2);
+    
+            //PLAYOFFS
+            const eliteEight = eliteEightTeams1.concat(eliteEightTeams2);
+    
+            const eliteEightMatchups = this.getMatchups(eliteEight, "4");
+            const endOfEliteEightTeams = this.executeRound(eliteEightMatchups, "4");
+    
+            const finalFour = endOfEliteEightTeams[0];
+            const eliminated3 = endOfEliteEightTeams[1];
+            this.addEliminatedTeams(teams, eliminated3);
+    
+    
+            const finalFourMatchups = this.getMatchups(finalFour, "5");
+            const endOfFinalFourTeams = this.executeRound(finalFourMatchups, "5");
+    
+            const finalTwo = endOfFinalFourTeams[0];
+            const eliminated4 = endOfFinalFourTeams[1];
+            //console.log(eliminated4[0].name + " " + eliminated4[1].name);
+            this.addEliminatedTeams(teams, eliminated4);
+    
+            const championshipsMatchup = this.getMatchups(finalTwo);
+            const afterChampionshipTeams = this.executeRound(championshipsMatchup, "6", "none", true);
+    
+            const champion = afterChampionshipTeams[0];
+            const runnerUp = afterChampionshipTeams[1];
+            //champion[0].showStats();
+            this.addEliminatedTeams(teams, runnerUp);
+            this.addEliminatedTeams(teams, champion);
 
-        // SECOND ROUND
-        const secondRoundGanhar = this.getMatchups(firstRoundGroups[0], "2");
-        const secondRoundPerder = this.getMatchups(firstRoundGroups[1], "2");
-
-        const secondRoundGanharTeams = this.executeRound(secondRoundGanhar, "2", "ganhar");
-        const secondRoundPerderTeams = this.executeRound(secondRoundPerder, "2", "perder");
-
-        const eliteEightTeams1 = secondRoundGanharTeams[0];
-
-        const eliminated1 = secondRoundPerderTeams[1];
-        this.addEliminatedTeams(teams, eliminated1);
-
-        console.log("teams eliminated: " + teams.length);
-
-        //THIRD ROUND
-        const thirdRounders1 = secondRoundGanharTeams[1];
-        const thirdRounders2 = secondRoundPerderTeams[0];
-        const thirdRoundTeams = thirdRounders1.concat(thirdRounders2);
-
-        const thirdRoundMatchups = this.getMatchups(thirdRoundTeams, "3");
-        const endOfThirdRoundTeams = this.executeRound(thirdRoundMatchups, "3");
-
-        const eliteEightTeams2 = endOfThirdRoundTeams[0];
-
-        const eliminated2 = endOfThirdRoundTeams[1];
-        this.addEliminatedTeams(teams, eliminated2);
-
-        //PLAYOFFS
-        const eliteEight = eliteEightTeams1.concat(eliteEightTeams2);
-
-        const eliteEightMatchups = this.getMatchups(eliteEight, "4");
-        const endOfEliteEightTeams = this.executeRound(eliteEightMatchups, "4");
-
-        const finalFour = endOfEliteEightTeams[0];
-        const eliminated3 = endOfEliteEightTeams[1];
-        this.addEliminatedTeams(teams, eliminated3);
-
-
-        const finalFourMatchups = this.getMatchups(finalFour, "5");
-        const endOfFinalFourTeams = this.executeRound(finalFourMatchups, "5");
-
-        const finalTwo = endOfFinalFourTeams[0];
-        const eliminated4 = endOfFinalFourTeams[1];
-        console.log(eliminated4[0].name + " " + eliminated4[1].name);
-        this.addEliminatedTeams(teams, eliminated4);
-
-        const championshipsMatchup = this.getMatchups(finalTwo);
-        const afterChampionshipTeams = this.executeRound(championshipsMatchup, "6", "none", true);
-
-        const champion = afterChampionshipTeams[0];
-        const runnerUp = afterChampionshipTeams[1];
-        champion[0].showStats();
-        this.addEliminatedTeams(teams, runnerUp);
-        this.addEliminatedTeams(teams, champion);
-
-        console.log("\nAll Team Stats After The Season:\n\n");
-
+        }
+        console.log("\nAll Team Stats After Seasons:\n");
         for (var t of teams) {
             t.showStats();
         }
@@ -79,14 +97,26 @@ const app = {
     // Dynamiccaly add team objects to populate our teams array
     createTeams() {
         const teams = [];
+        let c = 0;
         for (let i = 1; i < 17; i++) {
-            let team = new Team("team" + i);
-            teams.push(team);
+            if (i % 2 == 0) {
+                let team = new Team(names[c], "1");
+                teams.push(team);
+                c++;
+            } else if (i == 7) {
+                let team = new Team(names[c], "2");
+                teams.push(team);
+                c++;
+            } else {
+                let team = new Team(names[c]);
+                teams.push(team);
+                c++;
+            }
         }
         return teams;
     },
     showTeams(teams) {
-        console.log("# of Teams: " + teams.length);
+        //console.log("# of Teams: " + teams.length);
         for (var team of teams) {
             team.showStats();
         }
@@ -107,7 +137,7 @@ const app = {
         }
         const matchups = [];
         const contenders = teams;
-        console.log(teams.length);
+        //console.log(teams.length);
 
         for (let i = 0; i < teams.length + c; i++) {
             const matchup = new Matchup();
@@ -146,7 +176,7 @@ const app = {
     },
 
     executeRound(matchups, round_number, id, championship) {
-        console.log("\nNew Round: , " + round_number + " , " + id);
+        //console.log("\nNew Round: , " + round_number + " , " + id);
         const competitors = [];
         const winners = [];
         const losers = [];
@@ -154,17 +184,17 @@ const app = {
             const contenders = matchups[i].runMatch(championship);
             winners.push(contenders[0]);
             losers.push(contenders[1]);
-            console.log("WINNER: " + contenders[0].name);
+            //console.log("WINNER: " + contenders[0].name);
         }
         competitors.push(winners, losers);
-        console.log("WINNERS");
-        for (var w of winners) {
-            console.log(w.name);
-        }
-        console.log("LOSERS");
-        for (var l of losers) {
-            console.log(l.name);
-        }
+        // console.log("WINNERS");
+        // for (var w of winners) {
+        //     console.log(w.name);
+        // }
+        // console.log("LOSERS");
+        // for (var l of losers) {
+        //     console.log(l.name);
+        // }
         return competitors;
     }
 
