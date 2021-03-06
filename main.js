@@ -1,11 +1,14 @@
 import { Team } from "./team.js";
 import { Matchup } from "./matchup.js";
+import { Season } from "./season.js";
 
 
 // Run app.init() to start the program
 const app = {
     init() {
         const teams = this.createTeams();
+
+        const season = new Season(teams, 0);
 
         // FIRST ROUND
         const firstRound = this.getMatchups(teams, "1");
