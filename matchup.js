@@ -46,10 +46,14 @@ export class Matchup {
         if (this.team1Points === 3) {
             contenders.push(this.teams[0]);
             contenders.push(this.teams[1]);
+            this.teams[0].wins++;
+            this.teams[1].losses--;
             return contenders;
         } else {
             contenders.push(this.teams[1]);
             contenders.push(this.teams[0]);
+            this.teams[1].wins++;
+            this.teams[0].losses--;
             return contenders;
         }
     }

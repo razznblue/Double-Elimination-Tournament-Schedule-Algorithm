@@ -2,9 +2,9 @@ export class Team {
     constructor(name) {
         this.name = name;
         this.attackOptions = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10];
-        let wins = 0;
-        let losses = 0;
-        let championships = 0;
+        this.wins = 0;
+        this.losses = 0;
+        this.championships = 0;
     }
     printName() {
         console.log(this.name);
