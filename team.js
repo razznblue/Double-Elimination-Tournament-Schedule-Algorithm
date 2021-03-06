@@ -9,6 +9,12 @@ export class Team {
     printName() {
         console.log(this.name);
     }
+    showStats() {
+        console.log("\nShowing stats for " + this.name);
+        console.log("Total Wins: "+ this.wins);
+        console.log("Total Losses: "+ this.losses);
+        console.log("Total Championships: "+ this.championships);
+    }
 
     attackDmg() {
         const options = this.attackOptions;

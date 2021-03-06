@@ -11,7 +11,7 @@ export class Matchup {
         }
     }
 
-    runMatch() {
+    runMatch(championship) {
         console.log("Match between... " + this.teams[0].name + " and " + this.teams[1].name);
         while (true) {
             this.attemptScore();
@@ -19,7 +19,7 @@ export class Matchup {
                 break;
             }
         }
-        return this.getWinner();
+        return this.getWinner(championship);
     }
 
     attemptScore() {
@@ -39,21 +39,27 @@ export class Matchup {
         }
     }
 
-    getWinner() {
-        //You are actually returning both winner and loser. 
+    getWinner(championship) {
+        //You are actually returning both winner and loser. (Except if it's the championship game)
         //The winner will be put in the first posiiton of the returned array[0]
         const contenders = [];
         if (this.team1Points === 3) {
             contenders.push(this.teams[0]);
             contenders.push(this.teams[1]);
+            if (championship === true) {
+                this.teams[0].championships++;
+            }
             this.teams[0].wins++;
-            this.teams[1].losses--;
+            this.teams[1].losses++;
             return contenders;
         } else {
             contenders.push(this.teams[1]);
             contenders.push(this.teams[0]);
+            if (championship === true) {
+                this.teams[1].championships++;
+            }
             this.teams[1].wins++;
-            this.teams[0].losses--;
+            this.teams[0].losses++;
             return contenders;
         }
     }
