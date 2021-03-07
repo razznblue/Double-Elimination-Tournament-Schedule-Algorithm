@@ -32,7 +32,9 @@ const app = {
             const season = new Season(teams, i);
             season.start();
             seasons.push(season);
-            season.getChampion();
+            if (i === 10) {
+                season.showResults();
+            }
         }
     },
     // Dynamiccaly add team objects to populate our teams array

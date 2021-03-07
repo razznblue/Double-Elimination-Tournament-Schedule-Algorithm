@@ -82,6 +82,8 @@ export class Season {
         // CHAMPIONSHIP
         this.champion = afterChampionshipTeams[0];
         this.runnerUp = afterChampionshipTeams[1];
+
+        this.champion[0].addYearWon(this.seasonNumber);
         //champion[0].showStats();
         this.addEliminatedTeams(this.teams, this.runnerUp);
         this.addEliminatedTeams(this.teams, this.champion);

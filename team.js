@@ -11,6 +11,7 @@ export class Team {
         this.wins = 0;
         this.losses = 0;
         this.championships = 0;
+        this.yearsWon = [];
     }
     printName() {
         console.log(this.name);
@@ -22,11 +23,19 @@ export class Team {
         const winPercent = (this.wins / (this.wins + this.losses)) * 100;
         console.log("Win Percentage: " + winPercent.toFixed(2) + "%" );
         console.log("Total Championships: "+ this.championships);
+        console.log("Years Won: ");
+        for (const year of this.yearsWon) {
+            console.log(" - " + year);
+        }
     }
 
     attackDmg() {
         const options = this.attackOptions;
         const index = Math.floor(Math.random() * options.length);
         return options[index];
+    }
+    addYearWon(seasonNumber) {
+        const year = "season" + seasonNumber;
+        this.yearsWon.push(year);
     }
 }
