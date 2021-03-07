@@ -11,7 +11,7 @@ const names = [
     "Pinky Toes",
     "Ariolas",
     "Backyardigans",
-    "Titty Fart",
+    "Hunters",
     "Nostril Stuff",
     "Lukes",
     "The Dragonfly",
@@ -20,6 +20,7 @@ const names = [
     "Malasadas",
     "Jalapenos",
 ];
+const numberOfSeasons = 80;
 
 
 // Run app.init() to start the program
@@ -29,7 +30,7 @@ const app = {
 
         const season = new Season(teams, 0);
 
-        for (let i = 0; i < 80; i++) {
+        for (let i = 0; i < numberOfSeasons; i++) {
             // FIRST ROUND
             const firstRound = this.getMatchups(teams, "1");
             const firstRoundGroups = this.executeRound(firstRound, "1");
@@ -88,7 +89,7 @@ const app = {
             this.addEliminatedTeams(teams, champion);
 
         }
-        console.log("\nAll Team Stats After Seasons:\n");
+        console.log("\nAll Team Stats After " + numberOfSeasons + " Seasons:\n");
         for (var t of teams) {
             t.showStats();
         }
