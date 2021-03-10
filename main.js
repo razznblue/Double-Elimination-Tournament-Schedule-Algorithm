@@ -1,5 +1,4 @@
 import { Team } from "./team.js";
-import { Matchup } from "./matchup.js";
 import { Season } from "./season.js";
 
 const seasons = [];
@@ -21,7 +20,7 @@ const names = [
     "Malasadas",
     "Jalapenos",
 ];
-const numberOfSeasons = 10;
+const numberOfSeasons = 2;
 
 
 // Run app.init() to start the program
@@ -32,7 +31,7 @@ const app = {
             const season = new Season(teams, i);
             season.start();
             seasons.push(season);
-            if (i === 10) {
+            if (i === numberOfSeasons) {
                 season.showResults();
             }
         }

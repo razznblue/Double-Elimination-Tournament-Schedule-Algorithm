@@ -1,6 +1,13 @@
 export class Team {
     constructor(name, high) {
         this.name = name;
+        this.setAttackOptions(high);
+        this.wins = 0;
+        this.losses = 0;
+        this.championships = 0;
+        this.yearsWon = [];
+    }
+    setAttackOptions(high) {
         if (high == "1") {
             this.attackOptions = [5, 5, 3, 4, 5, 5, 5, 8, 9, 10];
         } else if (high == "2") {
@@ -8,13 +15,6 @@ export class Team {
         } else {
             this.attackOptions = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10];
         }
-        this.wins = 0;
-        this.losses = 0;
-        this.championships = 0;
-        this.yearsWon = [];
-    }
-    printName() {
-        console.log(this.name);
     }
     showStats() {
         console.log("\nShowing stats for " + this.name);
@@ -24,8 +24,13 @@ export class Team {
         console.log("Win Percentage: " + winPercent.toFixed(2) + "%" );
         console.log("Total Championships: "+ this.championships);
         console.log("Years Won: ");
-        for (const year of this.yearsWon) {
-            console.log(" - " + year);
+        this.showYearsWon();
+    }
+    showYearsWon() {
+        if (this.yearsWon.length > 0) {
+            for (const year of this.yearsWon) {
+                console.log(" - " + year);
+            }
         }
     }
 

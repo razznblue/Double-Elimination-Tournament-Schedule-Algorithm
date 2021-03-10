@@ -108,6 +108,8 @@ export class Season {
             const matchup = new Matchup();
             this.assignTeam(matchup, contenders);
             this.assignTeam(matchup, contenders);
+            console.log("Team 1: " + matchup.team1.name);
+            console.log("Team 2: " + matchup.team2.name);
             matchups.push(matchup);
         }
         return matchups;
