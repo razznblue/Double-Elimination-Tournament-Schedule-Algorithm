@@ -1,7 +1,9 @@
-import { Team } from "./team.js";
-import { League } from "./league.js";
+// LOCAL MODULES
+import { Team } from "./src/team.js";
+import { League } from "./src/league.js";
 
-const seasons = [];
+// MIDDLEWARE
+
 const names = [
     "Barbashes",
     "Inklings",
@@ -23,15 +25,15 @@ const names = [
 
 
 // Run app.init() to start the program
-const app = {
+const main = {
     init() {
-        const teams = this.createTeams();
-        const tourney = new League("DESCL", teams);
-        console.log("League is starting");
-        setTimeout(() => {
-            tourney.start();
-            console.log(tourney.getAllChampions());
-        }, 2000);
+        // const teams = this.createTeams();
+        // const tourney = new League("DESCL", teams);
+        // console.log("League is processing");
+        // setTimeout(() => {
+        //     tourney.start();
+        //     console.log(tourney.getAllChampions());
+        // }, 2000);
         
     },
     // Dynamiccaly add team objects to populate our teams array
@@ -64,4 +66,4 @@ const app = {
 
 }
 
-app.init();
+main.init();
