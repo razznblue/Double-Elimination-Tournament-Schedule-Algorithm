@@ -1,5 +1,5 @@
 import { Team } from "./team.js";
-import { Season } from "./season.js";
+import { League } from "./league.js";
 
 const seasons = [];
 const names = [
@@ -20,21 +20,19 @@ const names = [
     "Malasadas",
     "Jalapenos",
 ];
-const numberOfSeasons = 2;
 
 
 // Run app.init() to start the program
 const app = {
     init() {
         const teams = this.createTeams();
-        for (let i = 1; i < numberOfSeasons + 1; i++) {
-            const season = new Season(teams, i);
-            season.start();
-            seasons.push(season);
-            if (i === numberOfSeasons) {
-                season.showResults();
-            }
-        }
+        const tourney = new League("DESCL", teams);
+        console.log("League is starting");
+        setTimeout(() => {
+            tourney.start();
+            console.log(tourney.getAllChampions());
+        }, 2000);
+        
     },
     // Dynamiccaly add team objects to populate our teams array
     createTeams() {

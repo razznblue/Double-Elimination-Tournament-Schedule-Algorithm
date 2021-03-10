@@ -32,14 +32,10 @@ export class Matchup {
 
     attemptScore() {
         const team1atk = this.team1.attackDmg();
-        //console.log(this.teams[0].name + " attack: " + team1atk);
         const team2atk = this.team2.attackDmg();
-        //console.log(this.teams[1].name + " attack: " + team2atk);
         if (team1atk < team2atk) {
-            //console.log(this.teams[1].name + " scored");
             this.team2Points++;
         } else if (team1atk > team2atk) {
-            //console.log(this.teams[0].name + " scored");
             this.team1Points++;
         } else {
             //console.log("no score");
