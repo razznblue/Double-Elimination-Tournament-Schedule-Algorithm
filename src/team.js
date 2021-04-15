@@ -23,11 +23,11 @@ export class Team {
         const winPercent = (this.wins / (this.wins + this.losses)) * 100;
         console.log("Win Percentage: " + winPercent.toFixed(2) + "%" );
         console.log("Total Championships: "+ this.championships);
-        console.log("Years Won: ");
         this.showYearsWon();
     }
     showYearsWon() {
         if (this.yearsWon.length > 0) {
+            console.log("Years Won: ");
             for (const year of this.yearsWon) {
                 console.log(" - " + year);
             }

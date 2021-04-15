@@ -27,13 +27,13 @@ const names = [
 // Run app.init() to start the program
 const main = {
     init() {
-        // const teams = this.createTeams();
-        // const tourney = new League("DESCL", teams);
-        // console.log("League is processing");
-        // setTimeout(() => {
-        //     tourney.start();
-        //     console.log(tourney.getAllChampions());
-        // }, 2000);
+        const teams = this.createTeams();
+        const tourney = new League("DESCL", teams);
+        console.log("League is processing");
+        setTimeout(() => {
+            tourney.start();
+            console.log(tourney.getAllChampions());
+        }, 2000);
         
     },
     // Dynamiccaly add team objects to populate our teams array
